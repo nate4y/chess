@@ -4,35 +4,40 @@ class Board {
   private final int cols = 8;
   private final int width = 800;
   private final int height = 800;
+  private int[] board;
   
-  private final PImage pawn_w;
-  private final PImage pawn_b;
-  private final PImage knight_w;
-  private final PImage knight_b;
-  private final PImage bishop_w;
-  private final PImage bishop_b;
-  private final PImage rook_w;
-  private final PImage rook_b;
-  private final PImage queen_w;
-  private final PImage queen_b;
-  private final PImage king_w;
-  private final PImage king_b;
+  private final int pawn_w = 1;
+  private final int pawn_b = 2;
+  private final int knight_w  = 3;
+  private final int knight_b = 4;
+  private final int bishop_w = 5;
+  private final int bishop_b = 6;
+  private final int rook_w = 7;
+  private final int rook_b = 8;
+  private final int queen_w = 9;
+  private final int queen_b = 10;
+  private final int king_w = 11;
+  private final int king_b = 12;
+  
+  private PImage[] images;
 
   public Board() { 
     this.fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+    this.images = new PImage[13];
+    this.board = new int[64];
     
-    this.pawn_w = loadImage("assets/img/pawn_w.png");
-    this.pawn_b = loadImage("assets/img/pawn_b.png");
-    this.knight_w = loadImage("assets/img/knight_w.png");
-    this.knight_b = loadImage("assets/img/knight_b.png");
-    this.bishop_w = loadImage("assets/img/bishop_w.png");
-    this.bishop_b = loadImage("assets/img/bishop_b.png");
-    this.rook_w = loadImage("assets/img/rook_w.png");
-    this.rook_b = loadImage("assets/img/rook_b.png");
-    this.queen_w = loadImage("assets/img/queen_w.png");
-    this.queen_b = loadImage("assets/img/queen_b.png");
-    this.king_w = loadImage("assets/img/king_w.png");
-    this.king_b = loadImage("assets/img/king_b.png");
+    this.images[pawn_w] = loadImage("assets/img/pawn_w.png");
+    this.images[pawn_b] = loadImage("assets/img/pawn_b.png");
+    this.images[knight_w] = loadImage("assets/img/knight_w.png");
+    this.images[knight_b] = loadImage("assets/img/knight_b.png");
+    this.images[bishop_w] = loadImage("assets/img/bishop_w.png");
+    this.images[bishop_b] = loadImage("assets/img/bishop_b.png");
+    this.images[rook_w] = loadImage("assets/img/rook_w.png");
+    this.images[rook_b] = loadImage("assets/img/rook_b.png");
+    this.images[queen_w] = loadImage("assets/img/queen_w.png");
+    this.images[queen_b] = loadImage("assets/img/queen_b.png");
+    this.images[king_w] = loadImage("assets/img/king_w.png");
+    this.images[king_b] = loadImage("assets/img/king_b.png");
 }
 
   public void draw() {
@@ -54,10 +59,21 @@ class Board {
   }
   
   private void drawPieces() {
+    int currrent = 0;
+    
     for(int i = 0; i < rows; ++i){
       for(int j = 0; j < cols; ++j){
-        image(pawn_w, i * (height / rows) + 5, j * (width / cols) + 5, 90, 90);
+        image(images[8], i * (height / rows) + 5, j * (width / cols) + 5, 90, 90);
       }
+    }
+  }
+  
+  private int fenToInt(char piece) {
+    switch(piece){
+      case 'p':
+        return 1;
+      default:
+         return 0;
     }
   }
 }
